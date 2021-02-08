@@ -1,6 +1,6 @@
 import React, { Component } from "react";
 import Chart from "chart.js";
-import { Card } from "react-bootstrap";
+import { Card, Col } from "react-bootstrap";
 
 import "./chartCard.css";
 
@@ -33,10 +33,12 @@ export default class ChartCard extends Component {
   }
   render() {
     return (
-      <Card border="secondary" className="m-3">
-        <Card.Header>Some Title</Card.Header>
-        <canvas className="p-2" id="myChart" ref={this.chartRef} />
-      </Card>
+      <Col>
+        <Card className="m-3">
+          <Card.Header>Some Title</Card.Header>
+          <canvas className="p-2" id="myChart" ref={this.chartRef} />
+        </Card>
+      </Col>
     );
   }
 }
