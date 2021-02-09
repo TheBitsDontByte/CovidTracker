@@ -25,6 +25,8 @@ const Header = (props) => {
         handleClose={handleClose}
         countries={props.countries}
         createNewChart={props.createNewChart}
+        startDate={props.startDate}
+        endDate={props.endDate}
       />
       <Navbar bg="dark" variant="dark" className="justify-content-between">
         <Navbar.Brand as="h1">Covid Dashboard</Navbar.Brand>

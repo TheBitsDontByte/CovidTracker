@@ -2,14 +2,14 @@ const getInitialState = () => {
   var covidDashboardData = sessionStorage.getItem("covidDashboardData");
   if (covidDashboardData)
     //set its
-    return covidDashboardData;
+    return JSON.parse(covidDashboardData);
   else
     return {
       startDate: "2020-03-15",
       endDate: "2021-02-10",
       countries: [],
-      countriesCovidData: [],
       charts: [],
+      chartData: [],
     };
 };
 const initialState = getInitialState();
@@ -28,20 +28,29 @@ const reduce = (state = initialState, action) => {
       newState = { ...state, countries: action.payload };
       break;
     case "addChart":
-      console.log("in add");
       newState = {
         ...state,
         charts: [...state.charts, action.payload],
       };
       break;
-    case "addCountryCovidData":
+    case "chartDataUpdate":
+      let chartData = action.payload.data.map((d) => {
+        return { date: d.Date, cases: d.Cases };
+      });
+
       newState = {
         ...state,
-        countriesCovidData: [...state.countriesCovidData, action.payload],
+        chartData: [
+          ...state.chartData,
+          { country: action.payload.country, data: chartData },
+        ],
       };
+      break;
     default:
       newState = state;
   }
+
+  sessionStorage.setItem("covidDashboardData", JSON.stringify(newState));
 
   return newState;
 };

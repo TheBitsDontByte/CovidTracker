@@ -8,72 +8,31 @@ export default class ChartCard extends Component {
   chartRef = React.createRef();
 
   componentDidMount() {
-    console.log("did mount", this.props);
     const myChartRef = this.chartRef.current.getContext("2d");
 
+    console.log(
+      "Country one and chart data, ",
+      this.props.countryOne,
+      this.props.chartData
+    );
     new Chart(myChartRef, {
       type: "line",
       data: {
-        //Bring in data
-        labels: [
-          "Jan",
-          "Feb",
-          "March",
-          "Jan",
-          "Feb",
-          "March",
-          "Jan",
-          "Feb",
-          "March",
-          "Jan",
-          "Feb",
-          "March",
-          "Jan",
-          "Feb",
-          "March",
-          "Jan",
-          "Feb",
-          "March",
-          "Jan",
-          "Feb",
-          "March",
-          "Jan",
-          "Feb",
-          "March",
-        ],
+        labels: this.props.chartData
+          .find((c) => c.country.ISO2 == this.props.countryOne.ISO2)
+          .data.map((c) => c.date.slice(0, 10)),
         datasets: [
           {
             label: this.props.countryOne.Country,
-            data: [
-              46,
-              47,
-              61,
-              46,
-              37,
-              71,
-              46,
-              47,
-              61,
-              46,
-              37,
-              71,
-              46,
-              47,
-              61,
-              46,
-              37,
-              71,
-              46,
-              47,
-              61,
-              46,
-              37,
-              71,
-            ],
+            data: this.props.chartData
+              .find((c) => c.country.ISO2 == this.props.countryOne.ISO2)
+              .data.map((c) => c.cases),
           },
           {
             label: this.props.countryTwo.Country,
-            data: [83, 43, 93, 83, 61, 99],
+            data: this.props.chartData
+              .find((c) => c.country.ISO2 == this.props.countryTwo.ISO2)
+              .data.map((c) => c.cases),
           },
         ],
       },

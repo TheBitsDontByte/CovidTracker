@@ -10,7 +10,7 @@ function App(props) {
   props.getInitialState();
 
   return (
-    <Container>
+    <Container fluid>
       <Header />
       <Dashboard />
     </Container>

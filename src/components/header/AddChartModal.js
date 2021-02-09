@@ -34,7 +34,12 @@ const AddChartModal = (props) => {
 
   const handleCreate = () => {
     console.log(countryOne);
-    props.createNewChart(countryOne, countryTwo);
+    props.createNewChart(
+      countryOne,
+      countryTwo,
+      props.startDate,
+      props.endDate
+    );
     handleHide();
   };
 
