@@ -6,7 +6,7 @@ export const updateDateValue = (field, date) => {
   return { type, payload: date };
 };
 
-export function getInitialState() {
+export function getCountries() {
   // return (dispatch) =>
   //   axios
   //     .get("https://api.covid19api.com/countries")
@@ -29,6 +29,7 @@ export function getInitialState() {
 
   return { type: "setCountries", payload: countries };
 }
+
 export function createNewChart(countryOne, countryTwo, startDate, endDate) {
   return (dispatch) => {
     // axios

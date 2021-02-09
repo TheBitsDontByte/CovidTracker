@@ -7,32 +7,42 @@ import "./chartCard.css";
 export default class ChartCard extends Component {
   chartRef = React.createRef();
 
+  generateData(chartData, country) {
+    return chartData
+      .find((c) => c.country.ISO2 == country.ISO2)
+      .data.map((c) => c.cases);
+  }
+
+  generateLabels(chartData, country) {
+    return chartData
+      .find((c) => c.country.ISO2 == country.ISO2)
+      .data.map((c) => c.date.slice(0, 10));
+  }
+
   componentDidMount() {
     const myChartRef = this.chartRef.current.getContext("2d");
 
-    console.log(
-      "Country one and chart data, ",
-      this.props.countryOne,
-      this.props.chartData
-    );
     new Chart(myChartRef, {
       type: "line",
       data: {
-        labels: this.props.chartData
-          .find((c) => c.country.ISO2 == this.props.countryOne.ISO2)
-          .data.map((c) => c.date.slice(0, 10)),
+        labels: this.generateLabels(
+          this.props.chartData,
+          this.props.countryOne
+        ),
         datasets: [
           {
             label: this.props.countryOne.Country,
-            data: this.props.chartData
-              .find((c) => c.country.ISO2 == this.props.countryOne.ISO2)
-              .data.map((c) => c.cases),
+            data: this.generateData(
+              this.props.chartData,
+              this.props.countryOne
+            ),
           },
           {
             label: this.props.countryTwo.Country,
-            data: this.props.chartData
-              .find((c) => c.country.ISO2 == this.props.countryTwo.ISO2)
-              .data.map((c) => c.cases),
+            data: this.generateData(
+              this.props.chartData,
+              this.props.countryTwo
+            ),
           },
         ],
       },

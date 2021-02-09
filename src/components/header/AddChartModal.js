@@ -33,7 +33,6 @@ const AddChartModal = (props) => {
   };
 
   const handleCreate = () => {
-    console.log(countryOne);
     props.createNewChart(
       countryOne,
       countryTwo,

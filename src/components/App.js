@@ -4,10 +4,10 @@ import { Container } from "react-bootstrap";
 
 import Header from "./header/header";
 import Dashboard from "./dashboard/dashboard";
-import { getInitialState } from "../actions/index";
+import { getCountries } from "../actions/index";
 
 function App(props) {
-  props.getInitialState();
+  props.getCountries();
 
   return (
     <Container fluid>
@@ -17,4 +17,4 @@ function App(props) {
   );
 }
 
-export default connect(null, { getInitialState })(App);
+export default connect(null, { getCountries })(App);

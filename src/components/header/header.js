@@ -13,8 +13,6 @@ const Header = (props) => {
   };
 
   const handleChange = (field, changedDate) => {
-    //Have some checking, dont allow start after end
-    //Dont allow anything beyond today, before 2019 dec
     props.updateDateValue(field, changedDate);
   };
 
@@ -48,7 +46,7 @@ const Header = (props) => {
               placeholder="End Date"
               className="mr-sm-2"
               value={props.endDate}
-              onChange={(e) => handleChange("startDate", e.target.value)}
+              onChange={(e) => handleChange("endDate", e.target.value)}
             />
           </Col>
           <Col xs="auto" style={{ alignSelf: "flex-end" }}>

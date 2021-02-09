@@ -51,7 +51,6 @@ const reduce = (state = initialState, action) => {
   }
 
   sessionStorage.setItem("covidDashboardData", JSON.stringify(newState));
-
   return newState;
 };
 
