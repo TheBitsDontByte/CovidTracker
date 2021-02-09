@@ -1,17 +1,20 @@
 import React from "react";
 import { connect } from "react-redux";
+import { Container } from "react-bootstrap";
 
 import Header from "./header/header";
 import Dashboard from "./dashboard/dashboard";
-import { Container } from "react-bootstrap";
+import { getInitialState } from "../actions/index";
 
-function App() {
+function App(props) {
+  props.getInitialState();
+
   return (
-    <Container fluid>
+    <Container>
       <Header />
       <Dashboard />
     </Container>
   );
 }
 
-export default connect()(App);
+export default connect(null, { getInitialState })(App);

@@ -2,18 +2,30 @@ import React, { useState } from "react";
 import { connect } from "react-redux";
 import { Navbar, Button, Col, Row, FormControl, Form } from "react-bootstrap";
 
+import { updateDateValue, createNewChart } from "../../actions";
 import AddChartModal from "./AddChartModal.js";
 
-const Header = () => {
+const Header = (props) => {
   const [showModal, setShowModal] = useState(false);
 
   const handleClose = () => {
     setShowModal(false);
   };
 
+  const handleChange = (field, changedDate) => {
+    //Have some checking, dont allow start after end
+    //Dont allow anything beyond today, before 2019 dec
+    props.updateDateValue(field, changedDate);
+  };
+
   return (
     <>
-      <AddChartModal showModal={showModal} handleClose={handleClose} />
+      <AddChartModal
+        showModal={showModal}
+        handleClose={handleClose}
+        countries={props.countries}
+        createNewChart={props.createNewChart}
+      />
       <Navbar bg="dark" variant="dark" className="justify-content-between">
         <Navbar.Brand as="h1">Covid Dashboard</Navbar.Brand>
         <Row>
@@ -23,6 +35,8 @@ const Header = () => {
               type="date"
               placeholder="Start Date"
               className="mr-sm-2"
+              value={props.startDate}
+              onChange={(e) => handleChange("startDate", e.target.value)}
             />
           </Col>
           <Col>
@@ -31,6 +45,8 @@ const Header = () => {
               type="date"
               placeholder="End Date"
               className="mr-sm-2"
+              value={props.endDate}
+              onChange={(e) => handleChange("startDate", e.target.value)}
             />
           </Col>
           <Col xs="auto" style={{ alignSelf: "flex-end" }}>
@@ -44,4 +60,14 @@ const Header = () => {
   );
 };
 
-export default connect(null, null)(Header);
+const mapStateToProps = (newState, currentState) => {
+  return {
+    startDate: newState.startDate,
+    endDate: newState.endDate,
+    countries: newState.countries,
+  };
+};
+
+export default connect(mapStateToProps, { updateDateValue, createNewChart })(
+  Header
+);
